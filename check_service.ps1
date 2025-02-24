@@ -1,3 +1,12 @@
+# Author: Felipe Lima
+# Date: 23/01/2025
+# License: This script is free to redistribute and use as needed.
+#
+# Description:
+# This script checks the status of an application service and its connectivity to the database.
+# If the service is stopped, it verifies whether the database is accessible before attempting to start it.
+# The status of the checks and any actions taken are logged to a log file.
+
 # Configuration
 $DB_HOST = "192.168.8.2"   # Database server IP
 $DB_PORT = 5432              # Database port (e.g., 1433 for SQL Server, 3306 for MySQL)
