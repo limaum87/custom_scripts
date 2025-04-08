@@ -27,8 +27,17 @@ sudo apt-mark hold kubelet kubeadm kubectl
 
 # Instalar e iniciar o containerd (runtime de contêiner)
 sudo apt-get install -y containerd
-sudo systemctl start containerd
+# Criar diretório de config se não existir
+sudo mkdir -p /etc/containerd
+
+# Gerar configuração padrão e ajustar para SystemdCgroup = true
+containerd config default | sudo tee /etc/containerd/config.toml > /dev/null
+sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
+
+# Reiniciar containerd com a nova config
+sudo systemctl restart containerd
 sudo systemctl enable containerd
+
 
 # Verificar se o containerd está funcionando corretamente
 if ! systemctl is-active --quiet containerd; then
